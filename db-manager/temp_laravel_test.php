@@ -1,0 +1,10 @@
+<?php
+require __DIR__ . '/vendor/autoload.php';
+$app = require __DIR__ . '/bootstrap/app.php';
+$kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+$status = $kernel->handle(
+    $input = new Symfony\Component\Console\Input\ArgvInput([]),
+    $output = new Symfony\Component\Console\Output\NullOutput()
+);
+use App\Models\Business;
+echo Business::count();
