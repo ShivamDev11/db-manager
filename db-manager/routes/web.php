@@ -5,7 +5,11 @@ use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\ImportController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('businesses.index');
+});
+
+Route::get('/_health', function () {
+    return 'ok';
 });
 
 Route::prefix('businesses')->group(function () {

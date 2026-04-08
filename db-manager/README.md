@@ -1,100 +1,116 @@
-# DB Manager
+# Database Manager
 
-A Laravel application for managing business data with import, merge, and analysis features.
+A Laravel-based web application for managing business data with CSV/Excel import, duplicate detection, and merging capabilities.
 
 ## Features
 
-- Business database management
-- Business import functionality
-- Duplicate detection and merging
-- Business reporting
-- User authentication
+- 📊 **Business Data Management**: Store and manage business records
+- 📤 **CSV/Excel Import**: Upload and process CSV or Excel files
+- 🔍 **Duplicate Detection**: Automatically identify duplicate records using smart hashing
+- 🔗 **Merge Functionality**: Merge duplicate records with master-slave relationships
+- 📈 **Reporting**: Generate statistics and reports on your data
+- 🎨 **Modern UI**: Clean interface built with Tailwind CSS
 
 ## Requirements
 
-- PHP 8.2 or higher
-- MySQL 5.7 or higher
+- PHP 8.1 or higher
+- MySQL 5.7+ or MariaDB 10.3+
 - Composer
-- Node.js & npm
+- Node.js & npm (for asset compilation)
 
 ## Installation
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/ShivamDev11/db-manager.git
+   git clone https://github.com/yourusername/db-manager.git
    cd db-manager
    ```
 
-2. **Copy environment file:**
-   ```bash
-   cp .env.example .env
-   ```
-
-3. **Install PHP dependencies:**
+2. **Install PHP dependencies:**
    ```bash
    composer install
    ```
 
-4. **Generate application key:**
-   ```bash
-   php artisan key:generate
-   ```
-
-5. **Install Node.js dependencies:**
+3. **Install Node dependencies:**
    ```bash
    npm install
    ```
 
-6. **Build frontend assets:**
+4. **Environment Setup:**
    ```bash
-   npm run build
+   cp .env.example .env
+   php artisan key:generate
    ```
 
-7. **Configure your database:**
-   - Edit `.env` file and set your MySQL credentials:
+5. **Database Setup:**
+   - Create a MySQL database
+   - Update `.env` file with your database credentials:
      ```
      DB_CONNECTION=mysql
      DB_HOST=127.0.0.1
      DB_PORT=3306
-     DB_DATABASE=laravel
-     DB_USERNAME=root
-     DB_PASSWORD=
+     DB_DATABASE=your_database_name
+     DB_USERNAME=your_username
+     DB_PASSWORD=your_password
      ```
 
-8. **Run migrations:**
+6. **Run Migrations:**
    ```bash
    php artisan migrate
    ```
 
-9. **Start the application:**
-   ```bash
-   php artisan serve
-   ```
+## Running the Application
 
-   The app will be available at `http://localhost:8000`
+**Important:** Due to compatibility issues with `php artisan serve` on some Windows setups, use this command:
+
+```bash
+cd public
+php -S 127.0.0.1:8080 index.php
+```
+
+Then visit: http://127.0.0.1:8080
 
 ## Usage
 
-- Access the application at `http://localhost:8000`
-- Upload and import business data
-- Manage and merge duplicate records
-- Generate business reports
+1. **Import Data**: Go to `/import` to upload CSV/Excel files
+2. **View Businesses**: Browse all business records at `/businesses`
+3. **Find Duplicates**: Check for duplicates at `/businesses/duplicates`
+4. **Merge Records**: Merge duplicate entries as needed
+5. **Generate Reports**: View statistics at `/businesses/report`
 
-## Development
+## File Format for Import
 
-For development with auto-rebuild of assets:
-```bash
-npm run dev
-```
+Your CSV/Excel files should contain these columns:
+- `name` (required)
+- `email`
+- `phone`
+- `address`
+- `city`
+- `state`
+- `zip_code`
+- `website`
 
-Then in another terminal:
-```bash
-php artisan serve
-```
+## API Endpoints
+
+- `GET /` - Home page (redirects to businesses)
+- `GET /businesses` - List all businesses
+- `GET /businesses/duplicates` - Show duplicate records
+- `POST /businesses/merge` - Merge duplicate records
+- `GET /businesses/report` - Generate reports
+- `GET /import` - Import form
+- `POST /import` - Process file upload
+
+## Built With
+
+- **Laravel 12** - PHP Framework
+- **MySQL** - Database
+- **Tailwind CSS** - Styling
+- **maatwebsite/excel** - Excel/CSV processing
+- **Eloquent ORM** - Database operations
 
 ## License
 
-This project is open source and available under the MIT License.
+This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
